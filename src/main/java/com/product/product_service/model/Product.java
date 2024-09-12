@@ -30,6 +30,8 @@ public class Product {
 
     private int stock;
 
+    private String imageUrl;
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -50,6 +52,8 @@ public class Product {
     public void setStock(int availability) {
         this.stock = stock;
     }
+
+    public void setImageUrl(String imageUrl) {this.imageUrl=imageUrl;}
 
 }
 

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 @RestController
@@ -33,17 +35,17 @@ public class ProductController extends AbstractController {
     }
 
     @PostMapping
-    protected ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) {
+    protected ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO,@RequestParam("image") MultipartFile imageFile) {
 
-            ProductDTO createdProduct = productService.addProduct(productDTO);
+            ProductDTO createdProduct = productService.addProduct(productDTO, imageFile);
             return createdResponse(createdProduct);
 
     }
 
     @PutMapping("/{id}")
-    protected ResponseEntity<ProductDTO> updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
+    protected ResponseEntity<ProductDTO> updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO, @RequestParam(value = "image", required = false) MultipartFile imageFile) {
 
-            ProductDTO updatedProduct = productService.updateProduct(id, productDTO);
+            ProductDTO updatedProduct = productService.updateProduct(id, productDTO, imageFile);
             return successResponse(updatedProduct,HttpStatus.OK);
 
     }
